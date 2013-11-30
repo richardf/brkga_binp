@@ -1,18 +1,15 @@
 /*
- * SampleDecoder.cpp
- *
- *  Created on: Jan 14, 2011
- *      Author: rtoso
+ * BinPackingDecoder.cpp
  */
 
-#include "SampleDecoder.h"
+#include "BinPackingDecoder.h"
 
-SampleDecoder::SampleDecoder() { }
+BinPackingDecoder::BinPackingDecoder() { }
 
-SampleDecoder::~SampleDecoder() { }
+BinPackingDecoder::~BinPackingDecoder() { }
 
 // Runs in \Theta(n \log n):
-double SampleDecoder::decode(const std::vector< double >& chromosome) const {
+double BinPackingDecoder::decode(const std::vector< double >& chromosome) const {
 	std::vector< std::pair< double, unsigned > > ranking(chromosome.size());
 
 	for(unsigned i = 0; i < chromosome.size(); ++i) {
