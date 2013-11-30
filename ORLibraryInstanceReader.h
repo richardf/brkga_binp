@@ -15,10 +15,13 @@ class ORLibraryInstanceReader {
 public:
 	~ORLibraryInstanceReader();
 	static Instance& readInstance(std::string filename);
+	static Instance& getInstance();
 
 private:
 	ORLibraryInstanceReader();
 	static int openInstanceFile(std::string filename, std::ifstream& stream);
+	static Instance *instance;
+
 };
 
 

@@ -16,9 +16,13 @@
 #ifndef BINPACKINGDECODER_H
 #define BINPACKINGDECODER_H
 
+#include <iostream>
 #include <list>
 #include <vector>
 #include <algorithm>
+#include "Instance.h"
+#include "ORLibraryInstanceReader.h"
+#include "Solution.h"
 
 class BinPackingDecoder {
 public:

@@ -6,7 +6,7 @@
 #include "BRKGA.h"
 
 int main(int argc, char* argv[]) {
-	const unsigned n = 100;		// size of chromosomes
+//	const unsigned n = 100;		// size of chromosomes
 	const unsigned p = 1000;	// size of population
 	const double pe = 0.20;		// fraction of population to be the elite-set
 	const double pm = 0.10;		// fraction of population to be replaced by mutants
@@ -19,15 +19,17 @@ int main(int argc, char* argv[]) {
 	const long unsigned rngSeed = 0;	// seed to the random number generator
 	MTRand rng(rngSeed);				// initialize the random number generator
 	
+	Instance instance = ORLibraryInstanceReader::readInstance("inst.txt");
+
 	// initialize the BRKGA-based heuristic
-	BRKGA< BinPackingDecoder, MTRand > algorithm(n, p, pe, pm, rhoe, decoder, rng, K, MAXT);
+	BRKGA< BinPackingDecoder, MTRand > algorithm(instance.getNumberOfObjects(), p, pe, pm, rhoe, decoder, rng, K, MAXT);
 	
 	unsigned generation = 0;		// current generation
 //	const unsigned X_INTVL = 100;	// exchange best individuals at every 100 generations
 //	const unsigned X_NUMBER = 2;	// exchange top 2 best
 	const unsigned MAX_GENS = 1000;	// run for 1000 gens
 //	do {
-//		algorithm.evolve();	// evolve the population for one generation
+		algorithm.evolve();	// evolve the population for one generation
 //		generation++;
 //		if((++generation) % X_INTVL == 0) {
 //			algorithm.exchangeElite(X_NUMBER);	// exchange top individuals
@@ -37,7 +39,7 @@ int main(int argc, char* argv[]) {
 //	std::cout << "Best solution found has objective value = "
 //	 		<< algorithm.getBestFitness() << std::endl;
 	
-	Instance instance = ORLibraryInstanceReader::readInstance("inst.txt");
+
 	std::cout << instance << std::endl;
 	return 0;
 }

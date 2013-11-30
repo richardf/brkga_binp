@@ -8,6 +8,11 @@ ORLibraryInstanceReader::ORLibraryInstanceReader() { }
 ORLibraryInstanceReader::~ORLibraryInstanceReader() { }
 
 Instance& ORLibraryInstanceReader::readInstance(std::string filename) {
+
+	if(instance) {
+		delete instance;
+	}
+
 	std::ifstream file;
 	std::string instanceName;
 	float binCapacity;
@@ -19,13 +24,23 @@ Instance& ORLibraryInstanceReader::readInstance(std::string filename) {
 	file >> instanceName;
 	file >> binCapacity >> numberOfItens >> bestSolSize;
 
-	for(int i=0; i < numberOfItens; i++) {
+	for (int i = 0; i < numberOfItens; i++) {
 		float data;
 		file >> data;
 		objects.push_back(data);
 	}
 
-	return *new Instance(instanceName, binCapacity, bestSolSize, objects);
+	instance = new Instance(instanceName, binCapacity, bestSolSize, objects);
+
+	return *instance;
+}
+
+Instance& ORLibraryInstanceReader::getInstance() {
+	if(instance) {
+		return *instance;
+	} else {
+		throw "No instance file loaded.";
+	}
 }
 
 int ORLibraryInstanceReader::openInstanceFile(std::string filename, std::ifstream& stream) {
@@ -37,3 +52,5 @@ int ORLibraryInstanceReader::openInstanceFile(std::string filename, std::ifstrea
 		throw std::invalid_argument("File not found.");
 	}
 }
+
+Instance* ORLibraryInstanceReader::instance = NULL;

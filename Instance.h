@@ -14,6 +14,11 @@ class Instance {
 public:
 	Instance(std::string instName, float binCap, int bestSol, std::vector<float> objs);
 	~Instance();
+	std::string getInstanceName();
+	std::vector<float> getObjects();
+	float getBinCapacity();
+	int getBestKnownSolution();
+	int getNumberOfObjects();
 
 private:
 	std::string instanceName;
