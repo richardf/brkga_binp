@@ -7,6 +7,7 @@
 
 #include <map>
 #include <assert.h>
+#include <iostream>
 #include "Instance.h"
 
 class Solution {
@@ -17,11 +18,12 @@ public:
 	bool hasSpaceBox(int boxNumber, float weight);
 	float amountSpaceInBox(int boxNumber);
 	int createBox();
+	std::map< int, std::vector<int>* > getBoxes();
+	void printSolution();
 
 private:
 	Instance* instance;
 	std::map< int, std::vector<int>* > boxes;
-
 };
 
 

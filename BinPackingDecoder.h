@@ -23,6 +23,7 @@
 #include "Instance.h"
 #include "ORLibraryInstanceReader.h"
 #include "Solution.h"
+#include "Constructor.h"
 
 class BinPackingDecoder {
 public:

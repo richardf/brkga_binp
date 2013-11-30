@@ -8,7 +8,12 @@ Solution::Solution(Instance& inst) {
 	instance = &inst;
 }
 
-Solution::~Solution() { }
+Solution::~Solution() {
+	std::map< int, std::vector<int>* >::iterator iter;
+	for (iter = boxes.begin(); iter != boxes.end(); ++iter) {
+		delete iter->second;
+	}
+}
 
 bool Solution::addObject(int obj, int boxNumber) {
 	if(boxes.find(boxNumber) != boxes.end()) {
@@ -48,4 +53,29 @@ int Solution::createBox() {
 	int nextBox = boxes.size();
 	boxes.insert(std::pair<int, std::vector<int>* >(nextBox, new std::vector<int>));
 	return nextBox;
+}
+
+std::map< int, std::vector<int>* > Solution::getBoxes() {
+	return boxes;
+}
+
+
+void Solution::printSolution() {
+	std::vector< std::pair<int, int> > objectsBox;
+
+	std::map< int, std::vector<int>* >::iterator mapIter;
+	for (mapIter = boxes.begin(); mapIter != boxes.end(); ++mapIter) {
+		std::vector< int >::iterator vectorIter;
+		for (vectorIter = mapIter->second->begin(); vectorIter != mapIter->second->end(); ++vectorIter) {
+			objectsBox.push_back(std::make_pair(*vectorIter, mapIter->first));
+		}
+	}
+
+	std::sort(objectsBox.begin(), objectsBox.end());
+
+	std::cout << "Solution( ";
+	for(std::vector< std::pair<int, int> >::iterator it = objectsBox.begin(); it != objectsBox.end(); it++) {
+		std::cout << it->second << " ";
+	}
+	std::cout << ")" << std::endl;
 }
