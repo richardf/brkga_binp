@@ -17,7 +17,6 @@ double BinPackingDecoder::decode(const std::vector< double >& chromosome) const 
 		ranking[i] = std::pair< double, unsigned >(chromosome[i], i);
 	}
 
-	// Here we sort 'permutation', which will then produce a permutation of [n] in pair::second:
 	std::sort(ranking.begin(), ranking.end());
 
 	for(unsigned i = 0; i < ranking.size(); i++) {
@@ -33,6 +32,5 @@ double BinPackingDecoder::decode(const std::vector< double >& chromosome) const 
 
 	solution.printSolution();
 
-	// sample fitness is the first allele
-	return chromosome.front();
+	return FitnessCalculator::calculate(solution, instance, FitnessCalculator::BOX_USAGE_FITNESS);
 }

@@ -24,6 +24,7 @@
 #include "ORLibraryInstanceReader.h"
 #include "Solution.h"
 #include "Constructor.h"
+#include "FitnessCalculator.h"
 
 class BinPackingDecoder {
 public:
