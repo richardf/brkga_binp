@@ -32,8 +32,10 @@ public:
 	~BinPackingDecoder();
 
 	double decode(const std::vector< double >& chromosome) const;
+	int boxesUsed(const std::vector< double >& chromosome) const;
 
 private:
+	Solution& decodeIt(const std::vector< double >& chromosome) const;
 };
 
 #endif

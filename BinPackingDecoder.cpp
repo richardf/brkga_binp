@@ -11,7 +11,22 @@ double BinPackingDecoder::decode(const std::vector< double >& chromosome) const 
 	std::vector< std::pair< double, unsigned > > ranking(chromosome.size());
 	std::vector<unsigned> selectionOrder;
 	Instance instance = ORLibraryInstanceReader::getInstance();
-	Solution solution = Solution(instance);
+
+	Solution solution = decodeIt(chromosome);
+	return FitnessCalculator::calculate(solution, instance, FitnessCalculator::BOX_USAGE_FITNESS);
+}
+
+int BinPackingDecoder::boxesUsed(const std::vector< double >& chromosome) const {
+	Solution sol = decodeIt(chromosome);
+	int size = sol.getBoxes().size();
+	return size;
+}
+
+Solution& BinPackingDecoder::decodeIt(const std::vector< double >& chromosome) const {
+	std::vector< std::pair< double, unsigned > > ranking(chromosome.size());
+	std::vector<unsigned> selectionOrder;
+	Instance instance = ORLibraryInstanceReader::getInstance();
+	Solution *solution = new Solution(instance);
 
 	for(unsigned i = 0; i < chromosome.size(); ++i) {
 		ranking[i] = std::pair< double, unsigned >(chromosome[i], i);
@@ -23,14 +38,9 @@ double BinPackingDecoder::decode(const std::vector< double >& chromosome) const 
 		selectionOrder.push_back(ranking[i].second);
 	}
 
-
 	for( std::vector<unsigned>::const_iterator i = selectionOrder.begin(); i != selectionOrder.end(); ++i) {
-	    std::cout << *i << ' ';
-		Constructor::insertObject(*i, solution, instance, Constructor::BEST_FIT_STRATEGY);
+		Constructor::insertObject(*i, *solution, instance, Constructor::FIRST_FIT_STRATEGY);
 	}
-	std::cout << std::endl;
 
-	solution.printSolution();
-
-	return FitnessCalculator::calculate(solution, instance, FitnessCalculator::BOX_USAGE_FITNESS);
+	return *solution;
 }
