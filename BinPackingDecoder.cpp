@@ -26,7 +26,7 @@ double BinPackingDecoder::decode(const std::vector< double >& chromosome) const 
 
 	for( std::vector<unsigned>::const_iterator i = selectionOrder.begin(); i != selectionOrder.end(); ++i) {
 	    std::cout << *i << ' ';
-		Constructor::insertObject(*i, solution, instance, Constructor::FIRST_FIT_STRATEGY);
+		Constructor::insertObject(*i, solution, instance, Constructor::BEST_FIT_STRATEGY);
 	}
 	std::cout << std::endl;
 

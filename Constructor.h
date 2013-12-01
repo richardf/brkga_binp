@@ -19,6 +19,7 @@ private:
 	Constructor();
 	~Constructor();
 	static void insertUsingFirstFit(int objectNumber, Solution &solution, Instance &instance);
+	static void insertUsingBestFit(int objectNumber, Solution &solution, Instance &instance);
 };
 
 
