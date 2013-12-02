@@ -3,7 +3,10 @@
  */
 
 #include "BinPackingDecoder.h"
-BinPackingDecoder::BinPackingDecoder() { }
+BinPackingDecoder::BinPackingDecoder(int fitness, int constructor) {
+	fitnessFunction = fitness;
+	constructorStrategy = constructor;
+}
 
 BinPackingDecoder::~BinPackingDecoder() { }
 
@@ -13,7 +16,7 @@ double BinPackingDecoder::decode(const std::vector< double >& chromosome) const 
 	Instance instance = ORLibraryInstanceReader::getInstance();
 
 	Solution solution = decodeIt(chromosome);
-	return FitnessCalculator::calculate(solution, instance, FitnessCalculator::BOX_USAGE_FITNESS);
+	return FitnessCalculator::calculate(solution, instance, fitnessFunction);
 }
 
 int BinPackingDecoder::boxesUsed(const std::vector< double >& chromosome) const {
@@ -39,7 +42,7 @@ Solution& BinPackingDecoder::decodeIt(const std::vector< double >& chromosome) c
 	}
 
 	for( std::vector<unsigned>::const_iterator i = selectionOrder.begin(); i != selectionOrder.end(); ++i) {
-		Constructor::insertObject(*i, *solution, instance, Constructor::FIRST_FIT_STRATEGY);
+		Constructor::insertObject(*i, *solution, instance, constructorStrategy);
 	}
 
 	return *solution;

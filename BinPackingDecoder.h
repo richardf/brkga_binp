@@ -28,13 +28,15 @@
 
 class BinPackingDecoder {
 public:
-	BinPackingDecoder();
+	BinPackingDecoder(int fitness, int constructor);
 	~BinPackingDecoder();
 
 	double decode(const std::vector< double >& chromosome) const;
 	int boxesUsed(const std::vector< double >& chromosome) const;
 
 private:
+	short fitnessFunction;
+	short constructorStrategy;
 	Solution& decodeIt(const std::vector< double >& chromosome) const;
 };
 

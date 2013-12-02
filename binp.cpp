@@ -84,7 +84,7 @@ Config parseCommandLine(int argc, char** argv) {
 int main(int argc, char* argv[]) {
 	Config config = parseCommandLine(argc, argv);
 
-	BinPackingDecoder decoder;			// initialize the decoder
+	BinPackingDecoder decoder(FitnessCalculator::BOX_USAGE_FITNESS, Constructor::FIRST_FIT_STRATEGY);	// initialize the decoder
 	MTRand rng(config.seed);			// initialize the random number generator
 	Instance instance = ORLibraryInstanceReader::readInstance(config.filename);
 
@@ -108,5 +108,4 @@ int main(int argc, char* argv[]) {
 	std::cout << decoder.boxesUsed(algorithm.getBestChromosome()) << std::endl;
 	std::cout << algorithm.getBestFitness() << std::endl;
 	return 0;
-
 }
