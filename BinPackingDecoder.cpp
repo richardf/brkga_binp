@@ -6,6 +6,7 @@
 BinPackingDecoder::BinPackingDecoder(int fitness, int constructor) {
 	fitnessFunction = fitness;
 	constructorStrategy = constructor;
+	instance = ORLibraryInstanceReader::getInstance();
 }
 
 BinPackingDecoder::~BinPackingDecoder() { }
@@ -13,23 +14,25 @@ BinPackingDecoder::~BinPackingDecoder() { }
 double BinPackingDecoder::decode(const std::vector< double >& chromosome) const {
 	std::vector< std::pair< double, unsigned > > ranking(chromosome.size());
 	std::vector<unsigned> selectionOrder;
-	Instance instance = ORLibraryInstanceReader::getInstance();
 
-	Solution solution = decodeIt(chromosome);
-	return FitnessCalculator::calculate(solution, instance, fitnessFunction);
+	Solution *solution = decodeIt(chromosome);
+	double fitness = FitnessCalculator::calculate(*solution, *instance, fitnessFunction);
+	delete solution;
+
+	return fitness;
 }
 
 int BinPackingDecoder::boxesUsed(const std::vector< double >& chromosome) const {
-	Solution sol = decodeIt(chromosome);
-	int size = sol.getBoxes().size();
+	Solution *sol = decodeIt(chromosome);
+	int size = sol->getBoxes().size();
+	delete sol;
 	return size;
 }
 
-Solution& BinPackingDecoder::decodeIt(const std::vector< double >& chromosome) const {
+Solution* BinPackingDecoder::decodeIt(const std::vector< double >& chromosome) const {
 	std::vector< std::pair< double, unsigned > > ranking(chromosome.size());
 	std::vector<unsigned> selectionOrder;
-	Instance instance = ORLibraryInstanceReader::getInstance();
-	Solution *solution = new Solution(instance);
+	Solution *solution = new Solution(*instance);
 
 	for(unsigned i = 0; i < chromosome.size(); ++i) {
 		ranking[i] = std::pair< double, unsigned >(chromosome[i], i);
@@ -42,8 +45,8 @@ Solution& BinPackingDecoder::decodeIt(const std::vector< double >& chromosome) c
 	}
 
 	for( std::vector<unsigned>::const_iterator i = selectionOrder.begin(); i != selectionOrder.end(); ++i) {
-		Constructor::insertObject(*i, *solution, instance, constructorStrategy);
+		Constructor::insertObject(*i, *solution, *instance, constructorStrategy);
 	}
 
-	return *solution;
+	return solution;
 }

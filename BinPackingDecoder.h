@@ -37,7 +37,8 @@ public:
 private:
 	short fitnessFunction;
 	short constructorStrategy;
-	Solution& decodeIt(const std::vector< double >& chromosome) const;
+	Instance* instance;
+	Solution* decodeIt(const std::vector< double >& chromosome) const;
 };
 
 #endif
