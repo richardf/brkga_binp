@@ -11,8 +11,6 @@ BinPackingDecoder::BinPackingDecoder(int fitness, int constructor) {
 BinPackingDecoder::~BinPackingDecoder() { }
 
 double BinPackingDecoder::decode(const std::vector< double >& chromosome) const {
-	std::vector< std::pair< double, unsigned > > ranking(chromosome.size());
-	std::vector<unsigned> selectionOrder;
 	Instance instance = ORLibraryInstanceReader::getInstance();
 
 	Solution *solution = decodeIt(chromosome);
