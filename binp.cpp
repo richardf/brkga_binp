@@ -1,5 +1,6 @@
 #include <iostream>
 #include <unistd.h>
+#include <time.h>
 
 #include "BinPackingDecoder.h"
 #include "ORLibraryInstanceReader.h"
@@ -95,6 +96,9 @@ int main(int argc, char* argv[]) {
 	unsigned generation = 0;		// current generation
 //	const unsigned X_INTVL = 100;	// exchange best individuals at every 100 generations
 //	const unsigned X_NUMBER = 2;	// exchange top 2 best
+
+	clock_t start = clock();
+
 	do {
 		algorithm.evolve();	// evolve the population for one generation
 		generation++;
@@ -103,9 +107,10 @@ int main(int argc, char* argv[]) {
 //		}
 	} while (generation < config.generations);
 	
+	clock_t end = clock();
+	float seconds = (float)(end - start) / CLOCKS_PER_SEC;
 
-	std::cout << instance << std::endl;
-	std::cout << decoder.boxesUsed(algorithm.getBestChromosome()) << std::endl;
-	std::cout << algorithm.getBestFitness() << std::endl;
+	std::cout << decoder.boxesUsed(algorithm.getBestChromosome()) << " " << seconds << std::endl;
+	//std::cout << algorithm.getBestFitness() << std::endl;
 	return 0;
 }
