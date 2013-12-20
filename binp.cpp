@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <time.h>
 
-#include "BinPackingDecoder.h"
+#include "BinPackingDecoder2N.h"
 #include "ORLibraryInstanceReader.h"
 #include "Instance.h"
 #include "MTRand.h"
@@ -85,12 +85,11 @@ Config parseCommandLine(int argc, char** argv) {
 int main(int argc, char* argv[]) {
 	Config config = parseCommandLine(argc, argv);
 
-	BinPackingDecoder decoder(FitnessCalculator::BOX_USAGE_FITNESS, Constructor::FIRST_FIT_STRATEGY);	// initialize the decoder
-	MTRand rng(config.seed);			// initialize the random number generator
+	BinPackingDecoder2N decoder(FitnessCalculator::FALKENAUER_FITNESS);
+	MTRand rng(config.seed);
 	Instance instance = ORLibraryInstanceReader::readInstance(config.filename);
 
-	// initialize the BRKGA-based heuristic
-	BRKGA< BinPackingDecoder, MTRand > algorithm(instance.getNumberOfObjects(), config.population, config.frac_elite,
+	BRKGA< BinPackingDecoder2N, MTRand > algorithm(instance.getNumberOfObjects() * 2, config.population, config.frac_elite,
 			config.frac_mutants, config.prob_elite, decoder, rng, config.independent_pop, config.threads);
 	
 	unsigned generation = 0;		// current generation
