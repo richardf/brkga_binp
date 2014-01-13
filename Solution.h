@@ -8,6 +8,7 @@
 #include <map>
 #include <assert.h>
 #include <iostream>
+#include <algorithm>
 #include "Instance.h"
 
 class Solution {

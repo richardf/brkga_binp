@@ -44,7 +44,7 @@ Instance& ORLibraryInstanceReader::getInstance() {
 }
 
 int ORLibraryInstanceReader::openInstanceFile(std::string filename, std::ifstream& stream) {
-	stream.open(filename);
+	stream.open(filename.c_str());
 
 	if(stream.good()) {
 		return 1;

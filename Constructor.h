@@ -5,6 +5,7 @@
 #ifndef CONSTRUCTOR_H_
 #define CONSTRUCTOR_H_
 
+#include <algorithm>
 #include "Solution.h"
 #include "Instance.h"
 

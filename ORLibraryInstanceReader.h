@@ -9,6 +9,7 @@
 #include <fstream>
 #include <exception>
 #include <vector>
+#include <stdexcept>
 #include "Instance.h"
 
 class ORLibraryInstanceReader {
