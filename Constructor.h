@@ -1,5 +1,8 @@
 /*
  * Constructor.h
+ *
+ * Classic constructor algorithms for one-dimensional bin packing.
+ * Currently it implements: First Fit and Best Fit strategies.
  */
 
 #ifndef CONSTRUCTOR_H_

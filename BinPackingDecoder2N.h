@@ -1,6 +1,14 @@
 /*
  * BinPackingDecoder2N.h
  *
+ * Decoder that uses a chromosome of size 2N. The fitness function to be utilized (FitnessCalculator)
+ * must be provided as a constructor argument. The first N positions of chromosome indicates the
+ * insertion order of each element, while the N+1 to 2N positions indicates which constructor algorithm
+ * should be used, in the following way:
+ *
+ *   First Fit Algorithm, if chromossome[i] <= 0.5
+ *   Best Fit Algorithm, otherwise
+ *
  * Any decoder must have the format below, i.e., implement the method decode(std::vector< double >&)
  * returning a double corresponding to the fitness of that vector. If parallel decoding is to be
  * used in the BRKGA framework, then the decode() method _must_ be thread-safe; the best way to

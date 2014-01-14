@@ -1,6 +1,11 @@
 /*
  * FitnessCalculator.h
  *
+ * Fitness functions for evaluating solutions.
+ * Currently, it has:
+ * NUMBER_BOXES_FITNESS: the number of boxes utilized by a solution
+ * BOX_USAGE_FITNESS: the amount of wasted space (ie. empty)
+ * FALKENAUER_FITNESS: fitness function defined in Falkenauer, E. (1998). Genetic algorithms and grouping problems. John Wiley & Sons, Inc..
  */
 
 #ifndef FITNESSCALCULATOR_H_

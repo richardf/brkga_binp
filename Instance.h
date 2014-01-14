@@ -1,5 +1,7 @@
 /*
  * Instance.h
+ *
+ * Represents an instance of the problem.
  */
 
 #ifndef INSTANCE_H_

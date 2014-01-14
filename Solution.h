@@ -1,5 +1,7 @@
 /*
  * Solution.h
+ *
+ * Represents a solution for the one-dimensional bin packing problem.
  */
 
 #ifndef SOLUTION_H_

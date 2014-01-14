@@ -1,5 +1,7 @@
 /*
  * ORLibraryInstanceReader.h
+ *
+ * Responsible for loading the OR-Library instances.
  */
 
 #ifndef ORLIBRARYINSTANCEREADER_H_

@@ -35,7 +35,6 @@ struct Config {
 };
 
 Config parseCommandLine(int argc, char** argv) {
-	/* show usage */
 	if ( argc == 1 ) {
 		printUsage();
 		exit(0);
@@ -93,17 +92,12 @@ int main(int argc, char* argv[]) {
 			config.frac_mutants, config.prob_elite, decoder, rng, config.independent_pop, config.threads);
 	
 	unsigned generation = 0;		// current generation
-//	const unsigned X_INTVL = 100;	// exchange best individuals at every 100 generations
-//	const unsigned X_NUMBER = 2;	// exchange top 2 best
-
+  
 	clock_t start = clock();
 
 	do {
 		algorithm.evolve();	// evolve the population for one generation
 		generation++;
-//		if((++generation) % X_INTVL == 0) {
-//			algorithm.exchangeElite(X_NUMBER);	// exchange top individuals
-//		}
 	} while (generation < config.generations);
 	
 	clock_t end = clock();

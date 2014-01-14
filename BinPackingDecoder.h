@@ -1,6 +1,9 @@
 /*
  * BinPackingDecoder.h
  *
+ * Simple decoder that uses a chromosome of size N. The fitness function to be utilized (FitnessCalculator)
+ * and the constructor algorithm (Constructor) must be provided as constructor arguments. 
+ *
  * Any decoder must have the format below, i.e., implement the method decode(std::vector< double >&)
  * returning a double corresponding to the fitness of that vector. If parallel decoding is to be
  * used in the BRKGA framework, then the decode() method _must_ be thread-safe; the best way to
